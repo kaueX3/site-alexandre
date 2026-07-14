@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fonte mais confiável (e totalmente imparcial) de informações sobre Alicia">
+    <link rel="icon" type="image/png" href="imagens/line-chart.png">
+    <title>Aliciapedia - Enciclopédia Oficial de Alicia</title>
+    <link rel="stylesheet" href="aliciapedia.css?v=21">
+</head>
+<body>
+    <!-- Terms of Responsibility Gate (appears first before anything else) -->
+    <div class="terms-gate-overlay" id="termsGateOverlay">
+        <div class="terms-gate-container">
+            <div class="terms-gate-content glass-card">
+                <div class="terms-gate-header">
+                    <div class="terms-gate-icon">⚖️</div>
+                    <h1 class="terms-gate-title">Termo de Responsabilidade — Aliciapedia</h1>
+                    <p class="terms-gate-subtitle">Ao prosseguir, você concorda com os seguintes termos:</p>
+                </div>
+                
+                <div class="terms-gate-body">
+                    <ol class="terms-gate-list">
+                        <li class="terms-gate-item">
+                            <span class="terms-gate-clause">Não é permitido chorar durante o uso deste site, mesmo que o conteúdo seja emocionalmente devastador (nível: fotos antigas, memórias, ou verdades incômodas).</span>
+                        </li>
+                        <li class="terms-gate-item">
+                            <span class="terms-gate-clause">Agressão física ao desenvolvedor como reação ao conteúdo não será tolerada, por mais que ele mereça.</span>
+                        </li>
+                        <li class="terms-gate-item">
+                            <span class="terms-gate-clause">Qualquer semelhança com situações reais não é coincidência. É documentação.</span>
+                        </li>
+                        <li class="terms-gate-item">
+                            <span class="terms-gate-clause">O usuário reconhece que qualquer indignação com o conteúdo abaixo é, na verdade, prova de que está tudo certo.</span>
+                        </li>
+                        <li class="terms-gate-item">
+                            <span class="terms-gate-clause">Ao clicar em "Aceito", você declara estar em pleno controle emocional (mentira, mas prossiga mesmo assim).</span>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="terms-gate-footer">
+                    <button class="terms-accept-button" id="termsAcceptButton">
+                        <span>✅ Aceito</span>
+                    </button>
+                    <button class="terms-decline-button" id="termsDeclineButton">
+                        <span>❌ Não aceito</span>
+                    </button>
+                </div>
+                
+                <div class="terms-decline-message" id="termsDeclineMessage" style="display: none;">
+                    <p>Não aceitar não é uma opção disponível. Tenta de novo. 😏</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="background-image"></div>
+        <div class="background-overlay"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Aliciapedia</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Início</a></li>
+                <li><a href="#cases" class="nav-link">Arquivos de Caso</a></li>
+                <li><a href="#terms" class="nav-link">Termos e Condições</a></li>
+                <li><a href="#contradictions" class="nav-link">Detector de Hipocrisia</a></li>
+                <li><a href="#stats" class="nav-link">Estatísticas</a></li>
+                <li><a href="#achievements" class="nav-link">Conquistas</a></li>
+                <li><a href="#wisdom" class="nav-link">Sabedoria</a></li>
+                <li><a href="#happiness" class="nav-link">Sua Felicidade</a></li>
+                <li><a href="#secret" class="nav-link">Secreto</a></li>
+                <li><a href="#foryou" class="nav-link">Para Você</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="home-section" id="home">
+        <div class="hero-content">
+            <div class="badge">📚 Versão 1.0 - Totalmente Científica</div>
+            
+            <h1 class="hero-title">
+                <span class="title-word">Bem-vindo</span>
+                <span class="title-word">à</span>
+                <span class="title-word">Aliciapedia</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                A fonte mais confiável (e totalmente imparcial) de informações sobre Alicia
+            </p>
+
+            <button class="cta-button" id="startButton">
+                <span class="button-text">Começar a Explorar</span>
+                <span class="button-glow"></span>
+            </button>
+
+            <div class="quick-facts">
+                <div class="quick-fact">
+                    <span class="fact-number" data-target="999">0</span>
+                    <span class="fact-label">Leis Universais</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="fact-number" data-target="100">0</span>
+                    <span class="fact-label">% Verdadeiro</span>
+                </div>
+                <div class="quick-fact">
+                    <span class="fact-number" data-target="50">0</span>
+                    <span class="fact-label">Ditados Populares</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="mouse-wheel"></div>
+            </div>
+            <p>Role para explorar</p>
+        </div>
+    </section>
+
+    <!-- Case Files Section -->
+    <section class="content-section" id="cases">
+        <div class="section-container">
+            <h2 class="section-title">📁 Arquivos de Caso</h2>
+            <p class="section-description">Incidentes documentados sob investigação</p>
+            
+            <div class="cases-grid" id="casesGrid">
+                <!-- Cases will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms & Conditions Section -->
+    <section class="content-section alt-bg" id="terms">
+        <div class="section-container">
+            <h2 class="section-title">📜 Termos e Condições de Amizade com a Alicia</h2>
+            <p class="section-description">Cláusulas legais que regem esta amizade</p>
+            
+            <div class="terms-grid" id="termsGrid">
+                <!-- Terms will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Hypocrisy Detector Section -->
+    <section class="content-section" id="contradictions">
+        <div class="section-container">
+            <h2 class="section-title">🎭 Detector de Hipocrisia</h2>
+            <p class="section-description">Contradições detectadas pelo sistema de análise avançada</p>
+            
+            <div class="contradictions-grid" id="contradictionsGrid">
+                <!-- Contradictions will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="content-section alt-bg" id="stats">
+        <div class="section-container">
+            <h2 class="section-title">📊 Estatísticas Oficiais</h2>
+            <p class="section-description">Análise científica avançada e dados coletados por especialistas</p>
+            
+            <div class="stats-grid" id="statsGrid">
+                <!-- Stats will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="content-section" id="achievements">
+        <div class="section-container">
+            <h2 class="section-title">🏆 Conquistas Oficiais de Alicia</h2>
+            <p class="section-description">Realizações documentadas e certificadas ao longo da história</p>
+            
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Achievements will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Wisdom Generator Section -->
+    <section class="content-section alt-bg" id="wisdom">
+        <div class="section-container">
+            <h2 class="section-title">🧠 Gerador de Sabedoria</h2>
+            <p class="section-description">Clique no botão para receber sabedoria instantânea</p>
+            
+            <div class="wisdom-container">
+                <div class="wisdom-card glass-card">
+                    <p class="wisdom-quote" id="wisdomQuote">"Clique no botão abaixo para receber sua primeira dose de sabedoria."</p>
+                </div>
+                
+                <button class="wisdom-btn" id="wisdomBtn">
+                    <span>✨ Gerar Sabedoria ✨</span>
+                </button>
+
+                <div class="wisdom-counter">
+                    <span>Sabedorias geradas: <span id="wisdomCount">0</span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Your Daily Happiness Section -->
+    <section class="content-section" id="happiness">
+        <div class="section-container">
+            <h2 class="section-title">😊 Sua Felicidade Diária</h2>
+            <p class="section-description">O que mais poderia ser?</p>
+            
+            <div class="happiness-container">
+                <!-- Initial Question -->
+                <div class="happiness-initial" id="happinessInitial">
+                    <div class="happiness-question-card glass-card">
+                        <h3 class="happiness-big-question">Quer descobrir o que é ser feliz?</h3>
+                        <div class="happiness-buttons">
+                            <button class="happiness-btn happiness-yes" id="happinessYes">
+                                <span>✅ Sim</span>
+                            </button>
+                            <button class="happiness-btn happiness-no" id="happinessNo">
+                                <span>❌ Não</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explosion Screen (hidden path for "Não") -->
+                <div class="happiness-explosion-screen" id="explosionScreen" style="display: none;">
+                    <div class="explosion-card glass-card">
+                        <h3 class="explosion-text">Aperte o botão para explodir o site</h3>
+                        <button class="explosion-button" id="explosionButton">
+                            <span class="explosion-icon">💣</span>
+                            <span>EXPLODIR</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Interface -->
+                <div class="happiness-quiz" id="happinessQuiz" style="display: none;">
+                    <div class="quiz-card glass-card">
+                        <h3 class="quiz-question">Quem te conhece melhor: eu ou sua mãe?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-option" id="quizAlexandre">
+                                <span class="option-text">Alexandre</span>
+                            </button>
+                            <button class="quiz-option" id="quizMainha">
+                                <span class="option-text">Mainha</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wrong Answer Result -->
+                <div class="happiness-wrong" id="happinessWrong" style="display: none;">
+                    <div class="wrong-card glass-card wrong-answer">
+                        <div class="wrong-icon">❌</div>
+                        <p class="wrong-text">Como assim eu te conheço melhor que sua mãe??? Que elogio, hehe</p>
+                        <button class="retry-button" id="retryQuiz">
+                            <span>� Refaça o quiz</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Correct Answer Result (Final) -->
+                <div class="happiness-correct" id="happinessCorrect" style="display: none;">
+                    <div class="correct-card glass-card correct-answer">
+                        <div class="success-icon">✅</div>
+                        <img src="imagens/eu e ela.jpeg" alt="Sua felicidade diária" class="happiness-image">
+                        <div class="happiness-final-text">
+                            <p class="final-message">Ela te conhece melhor, mas eu sou sua felicidade hehe pq eu sou foda</p>
+                        </div>
+                        <div class="happiness-badge">
+                            <span class="badge-icon">❤️</span>
+                            <span class="badge-text">100% cientificamente comprovado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Explosion Overlay -->
+        <div class="explosion-overlay" id="explosionOverlay">
+            <div class="explosion-effect">
+                <div class="explosion-circle"></div>
+                <div class="explosion-particles"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secret Section -->
+    <section class="content-section alt-bg" id="secret">
+        <div class="section-container">
+            <h2 class="section-title">🔒 Área Secreta</h2>
+            <p class="section-description">Você foi avisado...</p>
+            
+            <!-- Music Quiz Gate -->
+            <div class="music-quiz-gate" id="musicQuizGate">
+                <div class="quiz-lock-screen">
+                    <div class="quiz-lock-icon">🔐</div>
+                    <h3 class="quiz-lock-title">Área Protegida</h3>
+                    <p class="quiz-lock-description">Prove que você conhece a trilha sonora oficial para desbloquear este conteúdo secreto.</p>
+                </div>
+                
+                <div class="quiz-container glass-card">
+                    <div class="quiz-header">
+                        <div class="quiz-question-number">Pergunta 1 de 4</div>
+                    </div>
+                    
+                    <div class="quiz-body">
+                        <h3 class="quiz-question-text">Qual música está sendo descrita?</h3>
+                        
+                        <div class="quiz-clue-container">
+                            <div class="quiz-clue-icon">💡</div>
+                            <p class="quiz-clue">Dica carregando...</p>
+                        </div>
+                        
+                        <button class="quiz-listen-button">
+                            <span class="quiz-listen-icon">🔊</span>
+                            <span class="quiz-listen-text">Ouvir trecho</span>
+                        </button>
+                        
+                        <div class="quiz-options-container">
+                            <!-- Options will be generated by JavaScript -->
+                        </div>
+                        
+                        <div class="quiz-feedback">
+                            <!-- Feedback will be shown here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Actual Secret Content (shown after quiz completion) -->
+            <div class="secret-container" id="secretActualContent" style="display: none;">
+                <!-- Refazer Quiz Button -->
+                <div class="retry-quiz-container">
+                    <button class="retry-quiz-button" id="retrySecretQuiz">
+                        <span class="retry-icon">🔄</span>
+                        <span class="retry-text">Refazer Quiz</span>
+                    </button>
+                </div>
+                
+                <button class="danger-button" id="dangerButton">
+                    <span class="danger-icon">🚫</span>
+                    <span class="danger-text">NÃO APERTE ESTE BOTÃO</span>
+                    <span class="danger-glow"></span>
+                </button>
+                
+                <div class="secret-reveal" id="secretReveal" style="display: none;">
+                    <div class="secret-image-card glass-card">
+                        <img src="imagens/pé.jpeg" alt="Imagem proibida" class="secret-image">
+                        <div class="secret-warning">
+                            <h3>🚨 AVISO</h3>
+                            <p>Esta foto foi oficialmente banida em 183 países por ser perturbadora demais. 🤣🦶</p>
+                            <p>Se você chegou até aqui...</p>
+                            <p>não tem mais volta. 😂</p>
+                        </div>
+                        <div class="mission-badge">
+                            <span class="badge-icon">🏆</span>
+                            <span>Missão Cumprida</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Para Você Section (For You) -->
+    <section class="content-section" id="foryou">
+        <div class="section-container">
+            <h2 class="section-title">💌 Para Você</h2>
+            <p class="section-description">Uma mensagem especial aguarda</p>
+            
+            <!-- Locked State (shown if Secret quiz not completed) -->
+            <div class="foryou-locked" id="foryouLocked" style="display: none;">
+                <div class="foryou-locked-card glass-card">
+                    <div class="foryou-lock-icon">🔒</div>
+                    <h3 class="foryou-locked-title">Área Bloqueada</h3>
+                    <p class="foryou-locked-text">Esta seção só será liberada após você desvendar a Área Secreta.</p>
+                </div>
+            </div>
+            
+            <!-- Word Search Puzzle (shown after Secret quiz completed) -->
+            <div class="foryou-content" id="foryouContent" style="display: none;">
+                <div class="wordsearch-container">
+                    <div class="wordsearch-intro glass-card">
+                        <p class="wordsearch-instruction">Encontre todas as palavras escondidas no caça-palavras:</p>
+                    </div>
+                    
+                    <div class="wordsearch-main">
+                        <div class="wordsearch-grid-container glass-card">
+                            <div class="wordsearch-grid" id="wordsearchGrid">
+                                <!-- Grid will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <div class="wordsearch-words-container glass-card">
+                            <h3 class="wordsearch-words-title">Palavras para encontrar:</h3>
+                            <ul class="wordsearch-words-list" id="wordsearchWordsList">
+                                <!-- Word list will be generated by JavaScript -->
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Completion Message -->
+                    <div class="wordsearch-completion" id="wordsearchCompletion" style="display: none;">
+                        <div class="completion-card glass-card">
+                            <div class="completion-icon">🎉</div>
+                            <h3 class="completion-title">Você encontrou tudo!</h3>
+                            <p class="completion-message">A chave foi revelada:</p>
+                            <div class="completion-code">26/10/2009</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Password Gate -->
+                    <div class="password-gate" id="passwordGate" style="display: none;">
+                        <div class="password-card glass-card">
+                            <div class="password-icon">🔐</div>
+                            <h3 class="password-title">Digite a senha para continuar</h3>
+                            
+                            <div class="password-input-container">
+                                <input 
+                                    type="text" 
+                                    id="passwordInput" 
+                                    class="password-input" 
+                                    placeholder="Digite a senha..."
+                                    autocomplete="off"
+                                >
+                                <button id="passwordSubmitButton" class="password-submit-button">
+                                    <span>✓ Confirmar</span>
+                                </button>
+                            </div>
+                            
+                            <div class="password-feedback" id="passwordFeedback" style="display: none;">
+                                <p class="password-error">❌ Senha incorreta, tente novamente</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Final Content - Poem & Gratitude -->
+                    <div class="foryou-final-content" id="foryouFinalContent" style="display: none;">
+                        <div class="final-poem-card glass-card">
+                            <div class="poem-header">
+                                <div class="poem-icon">✨</div>
+                                <h3 class="poem-title">Assim és</h3>
+                            </div>
+                            
+                            <div class="poem-body">
+                                <p class="poem-line">Assim és, serena como quem não busca ser vista,</p>
+                                <p class="poem-line">mas que ilumina sem saber que ilumina.</p>
+                                <p class="poem-line">Não há artifício em ti, nem necessidade dele,</p>
+                                <p class="poem-line">pois a simplicidade, quando verdadeira, já é rara.</p>
+                                <p class="poem-line-break"></p>
+                                <p class="poem-line">Vejo-te nas palavras ditas e nas caladas,</p>
+                                <p class="poem-line">e as caladas sempre dizem mais.</p>
+                                <p class="poem-line">Não há em ti pressa de provar quem és,</p>
+                                <p class="poem-line">e isso, por si, já é raro de encontrar.</p>
+                                <p class="poem-line-break"></p>
+                                <p class="poem-line">Não busco razão para o que vejo em ti,</p>
+                                <p class="poem-line">pois razão é coisa de quem duvida.</p>
+                                <p class="poem-line">Eu apenas vejo, e o que vejo basta</p>
+                                <p class="poem-line">e poucos merecem ser vistos assim.</p>
+                                <p class="poem-line-break"></p>
+                                <p class="poem-line">Assim és, como foste desde que te conheço,</p>
+                                <p class="poem-line">e assim, suspeito, hás de permanecer:</p>
+                                <p class="poem-line">alguém que se guarda, não por vaidade,</p>
+                                <p class="poem-line">mas porque poucos sabem o valor do que possuem.</p>
+                            </div>
+                            
+                            <div class="poem-footer">
+                                <button class="gratitude-button" id="gratitudeButton">
+                                    <span class="gratitude-icon">💝</span>
+                                    <span class="gratitude-text">Agradecimento</span>
+                                </button>
+                            </div>
+                            
+                            <!-- Gratitude Message (hidden initially) -->
+                            <div class="gratitude-message" id="gratitudeMessage" style="display: none;">
+                                <div class="gratitude-divider"></div>
+                                <p class="gratitude-text-content">
+                                    Depois de toda essa brincadeira, espero de coração que você tenha gostado do site que fiz especialmente pra você. Foi um trampo enorme, várias horas pensando em cada detalhe, mas só de imaginar sua reação já fez valer cada minuto. E sabe, no momento em que percebi que ia precisar mexer nisso, nem pensei duas vezes: a primeira coisa que veio na cabeça foi fazer algo bonito pra você. Enfim... muito obrigado por tudo, de verdade.
+                                </p>
+                                <div class="gratitude-signature">— Alexandre</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-title">Aliciapedia</p>
+            <p class="footer-text">© 2024 Aliciapedia. Todos os fatos são 100% verdadeiros.*</p>
+            <p class="footer-disclaimer">*A veracidade dos fatos não foi verificada por nenhuma entidade séria.</p>
+            <p class="footer-easter-egg">🥚 Pressione "A" três vezes para easter egg secreto</p>
+        </div>
+    </footer>
+
+    <!-- Easter Egg Modal -->
+    <div class="modal" id="easterEggModal">
+        <div class="modal-content glass-card">
+            <span class="modal-close" id="modalClose">&times;</span>
+            <h3>🎉 Você descobriu o Easter Egg!</h3>
+            <p>Parabéns! Você é oficialmente um explorador certificado da Aliciapedia.</p>
+            <p class="modal-secret">Fato Secreto: Alicia sabia que você ia encontrar isso.</p>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content glass-card">
+            <span class="modal-close" id="confirmClose">&times;</span>
+            <h3>⚠️</h3>
+            <p class="modal-warning-text">Você tem CERTEZA ABSOLUTA que quer ver isso?</p>
+            <p class="modal-warning-sub">Algumas coisas não podem ser desvistas... 😂</p>
+            <div class="modal-buttons">
+                <button class="modal-btn safe-btn" id="safeBtn">
+                    <span>🟢 Não, me tire daqui</span>
+                </button>
+                <button class="modal-btn danger-btn" id="confirmBtn">
+                    <span>🔴 Sim, me mostre</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Navigation Buttons -->
+    <div class="tab-nav-buttons">
+        <button class="tab-nav-btn tab-nav-prev" id="tabPrevBtn" title="Seção Anterior">
+            <span class="nav-arrow">←</span>
+            <span class="nav-label">Anterior</span>
+        </button>
+        <button class="tab-nav-btn tab-nav-next" id="tabNextBtn" title="Próxima Seção">
+            <span class="nav-label">Próximo</span>
+            <span class="nav-arrow">→</span>
+        </button>
+    </div>
+
+    <!-- Confetti Overlay -->
+    <div class="confetti-overlay" id="confettiOverlay">
+        <canvas id="confettiCanvas"></canvas>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="aliciapedia.js?v=26"></script>
+</body>
+</html>
