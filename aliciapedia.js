@@ -1682,6 +1682,9 @@ function showQuizQuestion() {
     
     // Store current song for the play button
     quizContainer.setAttribute('data-current-song-id', currentSong.id);
+    
+    // Preload audio for mobile compatibility
+    preloadQuizAudio(currentSong);
 }
 
 // Play audio snippet
@@ -1705,6 +1708,9 @@ function playQuizSnippet(song) {
     // Set new audio source
     quizState.quizAudio.src = `imagens/music/${song.audioFile}`;
     
+    // Load the audio immediately (synchronous)
+    quizState.quizAudio.load();
+    
     // Wait for metadata to load, then seek and play
     const playSnippet = () => {
         const startTime = Math.min(config.startTime, quizState.quizAudio.duration - config.duration - 1);
@@ -1715,9 +1721,13 @@ function playQuizSnippet(song) {
         console.log(`Playing quiz snippet: ${song.title} from ${startTime}s for ${config.duration}s`);
         
         // Play the audio
-        quizState.quizAudio.play().catch(err => {
-            console.error('Error playing quiz audio:', err);
-        });
+        const playPromise = quizState.quizAudio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(err => {
+                console.error('Error playing quiz audio:', err);
+            });
+        }
         
         // Stop after configured duration
         quizState.stopTimer = setTimeout(() => {
@@ -1746,6 +1756,17 @@ function playQuizSnippet(song) {
             }
         }, { once: true });
     }
+}
+
+// Preload audio for current question (called when question is displayed)
+function preloadQuizAudio(song) {
+    if (!quizState.quizAudio) return;
+    
+    // Set audio source without playing
+    quizState.quizAudio.src = `imagens/music/${song.audioFile}`;
+    quizState.quizAudio.load();
+    
+    console.log(`Preloaded audio for: ${song.title}`);
 }
 
 // Update play button state (legacy function - no longer needed)
@@ -1938,11 +1959,49 @@ document.addEventListener('click', (e) => {
         const currentSong = quizState.questionsOrder[quizState.currentQuestionIndex];
         
         if (quizState.quizAudio) {
+            const config = QUIZ_SONG_CONFIG[currentSong.id] || { startTime: 45, duration: 7 };
+            
+            // Clear any existing stop timer
+            if (quizState.stopTimer) {
+                clearTimeout(quizState.stopTimer);
+                quizState.stopTimer = null;
+            }
+            
             if (quizState.quizAudio.paused || quizState.quizAudio.src !== `${window.location.origin}/imagens/music/${currentSong.audioFile}`) {
-                // Play or replay the snippet
-                playQuizSnippet(currentSong);
+                // Ensure audio is loaded
+                if (quizState.quizAudio.src !== `${window.location.origin}/imagens/music/${currentSong.audioFile}`) {
+                    quizState.quizAudio.src = `imagens/music/${currentSong.audioFile}`;
+                    quizState.quizAudio.load();
+                }
+                
+                // Seek to start time and play immediately (synchronous)
+                const startTime = Math.min(config.startTime, quizState.quizAudio.duration - config.duration - 1);
+                quizState.quizAudio.currentTime = startTime;
+                
+                console.log(`Playing quiz snippet: ${currentSong.title} from ${startTime}s for ${config.duration}s`);
+                
+                // Play the audio - synchronous call within click handler
+                const playPromise = quizState.quizAudio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(err => {
+                        console.error('Error playing quiz audio:', err);
+                    });
+                }
+                
+                // Stop after configured duration
+                quizState.stopTimer = setTimeout(() => {
+                    if (quizState.quizAudio && !quizState.quizAudio.paused) {
+                        quizState.quizAudio.pause();
+                        updateQuizPlayButton();
+                        console.log('Quiz snippet stopped after duration');
+                    }
+                }, config.duration * 1000);
+                
+                // Update play button
+                updateQuizPlayButton();
             } else {
-                // Pause if already playing
+                // Pause if already playing - synchronous call
                 quizState.quizAudio.pause();
                 if (quizState.stopTimer) {
                     clearTimeout(quizState.stopTimer);
